@@ -39,20 +39,21 @@ const deleteAlbum = async (url) => {
                     </div>
 
                     <div class="p-6 text-gray-900">
-                        <table class="w-full border border-collapse border-slate-400 text-left text-sm text-gray-500 divide-y divide-slate-400">
+                        <table class="w-full border border-collapse border-slate-400 text-sm text-gray-500 divide-y divide-slate-400">
                             <thead>
                                 <tr>
-                                    <th class="border px-4 py-2">ID</th>
-                                    <th class="border px-4 py-2">Title</th>
-                                    <th class="border px-4 py-2">Action</th>
+                                    <th class="border px-4 py-2 text-center">ID</th>
+                                    <th class="border px-4 py-2 text-left">Title</th>
+                                    <th class="border px-4 py-2 text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="album in albums" :key="album.id">
-                                    <td class="border px-4 py-2">{{ album.id }}</td>
-                                    <td class="border px-4 py-2">{{ album.title }}</td>
-                                    <td class="border px-4 py-2">
-                                        <NavLink :href="route('albums.edit', album.id)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</NavLink>
+                                    <td class="border px-4 py-2 text-center">{{ album.id }}</td>
+                                    <td class="border px-4 py-2 text-left"><NavLink :href="route('albums.show', album.id)" class="hover:text-blue-500">{{ album.title }}</NavLink></td>
+                                    <td class="border px-4 py-2 text-center">
+                                        <NavLink :href="route('albums.show', album.id)" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">View</NavLink>
+                                        <NavLink :href="route('albums.edit', album.id)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-2 mr-2 rounded">Edit</NavLink>
                                         <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" @click="deleteAlbum(route('albums.destroy', album.id))">Delete</button>
                                     </td>
                                 </tr>
