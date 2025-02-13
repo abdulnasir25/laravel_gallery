@@ -29,9 +29,21 @@ class AlbumController extends Controller
 
     public function show(Album $album)
     {
-        // return Inertia::render('Album/Show', [
-        //     'album' => $album
-        // ]);
+        return Inertia::render('Album/Show', [
+            'album' => $album,
+            'photos' => $album->getMedia('photos')
+        ]);
+    }
+
+    public function storePhoto(Request $request, Album $album)
+    {
+        $request->validate([
+            'photo' => ['required', 'image']
+        ]);
+
+        $album->addMedia($request->file('photo'))->toMediaCollection('photos');
+
+        return to_route('albums.show', $album);
     }
 
     public function edit(Album $album)

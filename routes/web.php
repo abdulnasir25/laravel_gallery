@@ -21,6 +21,7 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::resource('albums', AlbumController::class);
+    Route::post('albums/{album}/photos', [AlbumController::class, 'storePhoto'])->name('albums.photos.store');
 
     ////////////////////////////
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
